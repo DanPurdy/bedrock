@@ -1,0 +1,85 @@
+// *************************************
+//
+//   Helpers
+//   -> Extends, Functions, Mixins, Animations
+//
+// *************************************
+
+// -------------------------------------
+//   Extends
+// -------------------------------------
+
+// ----- Debug ----- //
+
+%debug{
+  background-color: pink !important;
+}
+// ----- Ellipsis ----- //
+
+%ellipsis{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// ----- Clearfix ----- //
+
+%group:after{
+  clear: both;
+  content: '';
+  display: table;
+}
+
+// ----- Image Replacement ----- //
+
+%ir{
+  background-color: transparent;
+  border: 0;
+  overflow: hidden;
+  &:before{
+    content: '';
+    display: block;
+    width: 0;
+    height: 150%;
+  }
+}
+// -------------------------------------
+//   Functions
+// -------------------------------------
+
+// ----- em ----- //
+
+@function em($target, $context: $base-fontSize){
+  @if ($target == 0){
+    @return 0;
+  } @else{
+    @return #{$target / $context}em;
+  }
+}
+// ----- rem ----- //
+
+@function rem($size){
+  @return #{$size / $base-fontSize}rem;
+}
+// -------------------------------------
+//   Mixins
+// -------------------------------------
+
+// ----- Respond-to ----- //
+
+@mixin respond-to($media) {
+  @if $media == handhelds {
+    @media only screen and (max-width: $break-small) { @content; }
+  }
+  @else if $media == medium-screens {
+    @media only screen and (min-width: $break-small + 1) and (max-width: $break-large - 1) { @content; }
+  }
+  @else if $media == wide-screens {
+    @media only screen and (min-width: $break-large) { @content; }
+  }
+}
+
+// -------------------------------------
+//   Animations
+// -------------------------------------
+
